@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Gain some basic information about your SSL certificate
+# Make sure that you have openssl installed
+
 # Check if there is an input
 if [[ $1 ]]; then
 	validation=$(host $1)
