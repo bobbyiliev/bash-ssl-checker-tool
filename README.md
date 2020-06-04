@@ -60,3 +60,6 @@ SHA1 Fingerprint=C1:E1:6C:46:8A:74:94:14:00:94:88:B9:4B:2B:C5:90:79:DE:72:64
 ```
 
 Note: You need to have 'openssl' installed.
+
+Blog post:
+https://bobbyiliev.com/blog/ssl-checker-terminal-tool
