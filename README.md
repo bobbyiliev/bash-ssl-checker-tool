@@ -9,7 +9,7 @@ The script provides you with the following information:
 
 * The domain name that the SSL certificate has been issued for
 * The number of days the SSL certificate expires in:
-* The dates when the certificate was issued on and expieres on
+* The dates when the certificate was issued on and expires on
 * The certificate has been issued by:
 * Supported TLS versions
 * Certificate Fingerprint
