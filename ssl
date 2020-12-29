@@ -7,11 +7,11 @@
 ##
 # Colors
 ##
-green='\e[32m'
-blue='\e[34m'
-clear='\e[0m'
-orange='\e[33m'
-red='\e[31m'
+green=$(printf '\e[32m')
+blue=$(printf '\e[34m')
+clear=$(printf '\e[0m')
+orange=$(printf '\e[33m')
+red=$(printf '\e[31m')
 
 ##
 # Color Functions
