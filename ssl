@@ -135,10 +135,10 @@ $(ColorGreen './ssl domain.com')
 	sed -n '/-----BEGIN/,/-----END/p'|sed 's/^-----BEGIN/:-----BEGIN/'); 
 	for certificate in ${certificates#:}; do ColorOrangeON
 		#echo $certificate | tee >(openssl x509 -noout -serial) >(openssl x509 -noout -subject) 
-		for attr in subject serial fingerprint; do echo $certificate|openssl x509 -noout -$attr;done 
+		for attr in subject serial fingerprint; do echo $certificate|openssl x509 -noout -$attr|tr -d ":"| tr '[:upper:]' '[:lower:]' ;done; echo ''
 	done; IFS=$OLDIFS
 	echo "$(ColorRed '----')"
-   echo -e "$(ColorRed '#') $(ColorGreen 'Leaf Certificate Decode:')"; ColorCyanON
-	echo|openssl s_client -servername $1 -connect $1:443 2>/dev/null|openssl x509 -noout -text
+#   echo -e "$(ColorRed '#') $(ColorGreen 'Leaf Certificate Decode:')"; ColorCyanON
+#	echo|openssl s_client -servername $1 -connect $1:443 2>/dev/null|openssl x509 -noout -text
 esac
 #echo -ne "$(ColorRed '\n---------------------------------------------------------')\n" 
