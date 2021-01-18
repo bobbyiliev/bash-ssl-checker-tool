@@ -98,14 +98,26 @@ $(ColorGreen './ssl domain.com')
 	echo "$(ColorRed '----')"
 
    echo -e "$(ColorRed '#') $(ColorGreen 'Leaf Certificate Expires In:')"
-	# macos - format
-	#date -j -f "%b %d %T %Y %Z" "$expires" +'%s'
-	#date -j -f "%F" "$today" +'%s'
-	## echo $(( ( $(date -ud "$expires" +'%s') - $(date -ud "$today" +'%s') )/60/60/24 )) days
-	echo "	$(( ( $(date -j -f "%b %d %T %Y %Z" "$expires" +'%s') - $(date -j -f "%F" "$today" +'%s') )/60/60/24 )) days"
-	echo "$(ColorRed '----')"
 
-   echo -e "$(ColorRed '#') $(ColorGreen 'Leaf Certificate Dates:')"
+# Detect the platform (similar to $OSTYPE)
+OS="`uname`"
+case $OS in
+  'Linux'|'FreeBSD'|'SunOS'|'AIX')
+	echo $(( ( $(date -ud "$expires" +'%s') - $(date -ud "$today" +'%s') )/60/60/24 )) days
+    ;;
+  'Darwin') 
+    OS='Mac'
+		# macos - format
+		#date -j -f "%b %d %T %Y %Z" "$expires" +'%s'; date -j -f "%F" "$today" +'%s'
+		## echo $(( ( $(date -ud "$expires" +'%s') - $(date -ud "$today" +'%s') )/60/60/24 )) days
+		echo "	$(( ( $(date -j -f "%b %d %T %Y %Z" "$expires" +'%s') - $(date -j -f "%F" "$today" +'%s') )/60/60/24 )) days"
+    ;;
+  *) 
+	echo "Error: Can't Find DATE command for your OS version!"
+	;;
+esac
+	echo "$(ColorRed '----')"
+	echo -e "$(ColorRed '#') $(ColorGreen 'Leaf Certificate Dates:')"
 	echo|openssl s_client -servername $1 -connect $1:443 2>/dev/null|openssl x509 -noout -dates|\
 	 sed 's/notAfter=/Expires On: /' | sed 's/notBefore=/Issued  On: /'
 	echo "$(ColorRed '----')"
