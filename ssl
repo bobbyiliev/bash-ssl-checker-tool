@@ -107,6 +107,7 @@ case $OS in
     ;;
   'Darwin') 
     OS='Mac'
+		export LC_TIME="en_US"    
 		# macos - format
 		#date -j -f "%b %d %T %Y %Z" "$expires" +'%s'; date -j -f "%F" "$today" +'%s'
 		## echo $(( ( $(date -ud "$expires" +'%s') - $(date -ud "$today" +'%s') )/60/60/24 )) days
